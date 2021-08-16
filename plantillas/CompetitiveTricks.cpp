@@ -5,7 +5,7 @@
 #define dll double
 #define all(x) x.begin(),x.end()
 #define INF 1e9
-#define MOD 10000007
+#define MOD 1000000007
 using namespace std;
 vector <ll> vll;
 
