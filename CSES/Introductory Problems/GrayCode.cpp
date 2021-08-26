@@ -6,31 +6,29 @@
 #define dll double
 #define all(x) x.begin(),x.end()
 #define INF 1e9
-#define MOD 10000007
+#define MOD 1000000007
 using namespace std;
 vector <ll> vll;
-
-ll solve()
+void print(ll num, ll maxPow)
 {
-
+    for(ll x=maxPow; x>0; x>>=1)
+       cout<<((num&x)? 1:0);
+    cout<<"\n";
+}
+ll solve(ll n)
+{
+    ll aux;
+    ll maxPow=(1<<(n-1));
+    for(ll x=0; x<(1<<n); x++)
+    {
+        aux=x>>1;
+        print(x^aux,maxPow);
+    }
 }
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-    ll n;
-    cin>>n;
-    bool res[n];
-    for(ll x=0; x<(1<<n); x++)
-    {
-        for(ll y=0; y<n; y++)
-        {
-            if(x&(1<<y))
-                res[y]=1;
-            else res[y]=0;
-        }
-        for(ll z=n-1; z>=0; z--)
-            cout<<res[z];
-        cout<<"\n";
-    }
+    ll n; cin>>n;
+    solve(n);
 }
