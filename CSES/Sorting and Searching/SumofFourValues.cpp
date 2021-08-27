@@ -1,61 +1,56 @@
-/*#include <iostream>
-#include <algorithm>*/
-#include <bits/stdc++.h>
-using namespace std;
-struct p
-{
-    int x,y;
-};
-int i1,i2,i3,i4;
-long long suma1,suma2;
-bool comp(p a,p b)
-{
-    return a.x<b.x;
-}
-int main()
-{
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
 
-    int n,m;
-    cin>>n>>m;
-    p arr[n];
-    for(int x =0; x<n; x++)
+#include <bits/stdc++.h>
+
+#define forr(n,m,p) for(int x=n; x<m; x+=p)
+#define ll long long int
+#define dll double
+#define all(x) x.begin(),x.end()
+#define INF 1e9
+#define MOD 1000000007
+using namespace std;
+vector <ll> vll;
+
+void solve(ll n,ll target, pair<ll,ll> arr[])
+{
+    ll indiceA;
+    ll indiceB;
+    ll suma;
+    sort(arr,arr+n);
+    for(ll x=0; x<n; x++)
     {
-        cin>>arr[x].x;
-        arr[x].y=x;
-    }
-    sort(arr,arr+n,comp);
-    for(i1=0,i4=n-1; i1<i4;)
-    {
-        suma1=arr[i1].x+arr[i4].x;
-        suma2=0;
-        for(i2=0, i3=n-1; i2<i3;)
+
+        for(ll y=x+1; y<n-2; y++)
         {
-            if(i2!= i1 and i2!= i4 and i3!= i1 and i3!= i4)
+            indiceA=y+1;
+            indiceB=n-1;
+            while(indiceA<indiceB)
             {
-                suma2=arr[i2].x+arr[i3].x;
-                if(suma2+suma1==m)
+                suma=arr[x].first+arr[y].first+arr[indiceA].first+arr[indiceB].first;
+                if(suma<target)
+                    indiceA++;
+                else if(suma>target)
+                    indiceB--;
+                else
                 {
-                    cout<<arr[i1].y+1<<" "<<arr[i2].y+1<<" "<<arr[i3].y+1<<" "<<arr[i4].y+1;
-                    return 0;
-                }
-                else if(suma2+suma1<m)i2++;
-                else if(suma2+suma1>m) i3--;
-            }else{
-                if(i2==i1 or i2 == i4)
-                {
-                    i2++;
-                }
-                if(i3==i1 or i3 == i4)
-                {
-                    i3--;
+                    cout<<arr[x].second+1<<" "<<arr[y].second+1<<" "<<arr[indiceA].second+1<<" "<<arr[indiceB].second+1;
+                    return;
                 }
             }
         }
-        cout<<i1<<" "<<i2<<" "<<i3<<" "<<i4<<" "<<suma1<<" "<<suma2<<" "<<suma1+suma2<<endl;
-        if(suma2+suma1>m)i4--;
-        else if(suma2+suma1<m)i1++;
     }
     cout<<"IMPOSSIBLE";
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll n,target;
+    cin>>n>>target;
+    pair<ll,ll> arr[n];
+    for(ll x=0; x<n; x++)
+    {
+        cin>>arr[x].first;
+        arr[x].second=x;
+    }
+    solve(n,target,arr);
 }
