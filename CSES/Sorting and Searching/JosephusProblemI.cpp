@@ -6,28 +6,35 @@
 #define dll double
 #define all(x) x.begin(),x.end()
 #define INF 1e9
-#define MOD 10000007
+#define MOD 1000000007
 using namespace std;
 vector <ll> vll;
-ll solve(ll n)
+void solve()
 {
-    bool arr[20010];
-    for(ll x=0; x<=n; x++)arr[x]=0;
-    ll cuenta=0;
-    ll indice=2;
-    ll cons=2;
-    bool act=0;
-    while(cuenta<n)
+    ll n;
+    cin>>n;
+    ll x=2;
+    for(x; x<=n; x+=2)
+        cout<<x<<" ";
+    for(ll y =1; y<=n; y+=2)
+        vll.push_back(y);
+    if(n%2==1)
+        x=0;
+    else x=1;
+    while(!vll.empty())
     {
-        cout<<arr[indice]<<endl;
-        cuenta++;
+        for(x; x<vll.size(); x++)
+        {
+            cout<<vll[x]<<" ";
+            vll.erase(vll.begin()+x);
+        }
+        if(vll.size()>0)
+            x%=vll.size();
     }
 }
 int main()
 {
-    ios::sync_with_stdio(false);
+   ios::sync_with_stdio(false);
     cin.tie(NULL);
-    ll n;
-    cin>>n;
-    solve(n);
+    solve();
 }
