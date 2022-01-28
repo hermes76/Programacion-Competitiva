@@ -24,9 +24,8 @@ typedef vector<ll> vll;
 //defines
 #define forr(n,m,p) for(int x=n; x<m; x+=p)
 #define all(x) x.begin(),x.end()
-#define INF 1e9
+#define INF 1000000000000000000
 #define MOD 1000000007
-
 
 void solve()
 {
@@ -37,8 +36,8 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     ll t;
-    //t=1;
-    cin>>t;
+    t=1;
+    //cin>>t;
     while(t--)
         solve();
 }
