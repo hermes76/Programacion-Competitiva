@@ -76,28 +76,17 @@ ll sum_color(vll rows, vll columns)
     ll n= rows.size();
     ll ans_rows=0;
     ll ans_columns=0;
-    
+
     vll prefix_sums_rows(n,0);
     vll prefix_sums_columns(n,0);
 
     sort(all(rows));
     sort(all(columns));
-
-    prefix_sums_rows[0]=rows[0];
-    prefix_sums_columns[0]=columns[0];
-    for(ll x=1; x<n; x++)
-    {
-        prefix_sums_rows[x]=prefix_sums_rows[x-1]+ rows[x];
-        prefix_sums_columns[x]= prefix_sums_columns[x-1]+ columns[x];
-    }
-    
  
     for(ll x=0; x<n; x++)
     {
-        ans_rows+= abs(rows[x]* (n-x-1) 
-        - (prefix_sums_rows[n-1]-prefix_sums_rows[x]));
-        ans_columns+= abs(columns[x] * (n-x-1)
-        - (prefix_sums_columns[n-1]-prefix_sums_columns[x]));
+        ans_rows+= (2*x+1-n)*rows[x];
+        ans_columns+=(2*x+1-n)*columns[x];
     }
     return ans_rows+ ans_columns;
 }
