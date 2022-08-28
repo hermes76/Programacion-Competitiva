@@ -73,15 +73,43 @@ struct SegmentTree
 };
 void solve()
 {
-    ll a,b,c,d;
-    cin>>a>>b>>c>>d;
-    if(a*d==b*c)
-        cout<<0<<endl;
-    else if(d*a!=0 && (c*b)%(d*a)==0 || (c*b!=0 && (d*a)%(c*b)==0))
-        cout<<1<<endl;
-    else cout<<2<<endl;
-
-
+    ll n;
+    cin>>n;
+    vll a(n);
+    vll b(n);
+    for(ll x=0; x<n; x++)
+        cin>>a[x];
+    for(ll x=0; x<n; x++)
+        cin>>b[x];
+    
+    vll minimum(n),maximum(n);
+    set<ll> minix;
+    for(ll x=0; x<n; x++)
+        minix.insert(b[x]);
+    for(ll x=0; x<n; x++)
+    {
+        ll num=*minix.lower_bound(a[x]);
+        minimum[x]=num-a[x];
+    }
+    maximum[n-1]=b[n-1];
+    for(ll x=n-1; x>=0; x--)
+    {
+        ll k=0;
+        for(ll y=n; y>0; y/=2)
+            while(k+y<n && a[k+y]<=b[x])
+                k+=y;
+        if(x==k)
+            maximum[x]=b[x];
+        else
+            maximum[x]=maximum[k];
+        
+    }
+    for(ll x=0; x<n; x++)
+        cout<<minimum[x]<<' ';
+    cout<<endl;
+    for(ll x=0; x<n; x++)
+        cout<<maximum[x]-a[x]<<' ';
+    cout<<endl;
 }
 int main()
 {

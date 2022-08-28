@@ -73,15 +73,21 @@ struct SegmentTree
 };
 void solve()
 {
-    ll a,b,c,d;
-    cin>>a>>b>>c>>d;
-    if(a*d==b*c)
-        cout<<0<<endl;
-    else if(d*a!=0 && (c*b)%(d*a)==0 || (c*b!=0 && (d*a)%(c*b)==0))
-        cout<<1<<endl;
-    else cout<<2<<endl;
-
-
+    vector<string> cad(2);
+    cin>>cad[0];
+    cin>>cad[1];
+    set<char> a;
+    for(ll x=0; x<2; x++)
+        for(ll y=0; y<2; y++)
+            a.insert(cad[x][y]);
+    if(a.size()==1)
+        cout<<0;
+    else if(a.size()==2)
+        cout<<1;
+    else if(a.size()==3)
+        cout<<2;
+    else cout<<3;
+    cout<<endl;
 }
 int main()
 {

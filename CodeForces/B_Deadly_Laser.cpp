@@ -71,17 +71,70 @@ struct SegmentTree
         }
     }
 };
+ll distance(ll x,ll y, ll sx, ll sy)
+{
+    return abs(sx-x)+abs(sy-y);
+}
 void solve()
 {
-    ll a,b,c,d;
-    cin>>a>>b>>c>>d;
-    if(a*d==b*c)
-        cout<<0<<endl;
-    else if(d*a!=0 && (c*b)%(d*a)==0 || (c*b!=0 && (d*a)%(c*b)==0))
-        cout<<1<<endl;
-    else cout<<2<<endl;
+    ll n,m,sx,sy,d;
+    cin>>n>>m>>sx>>sy>>d;
+    ll x=1,y=1;
+    bool flag=true;
+   for(; x<n; x++)
+   {
+    
+        if(distance(x,y,sx,sy)<=d)
+            {
+                flag=false;
+                break;  
+            }
+   }
+    if(flag)
+    {
 
+        for(; y<=m; y++)
+        {
+         if(distance(x,y,sx,sy)<=d)
+         {
+            flag=false;
+            break;
+         }
+        }
+        if(flag)
+        {
+            cout<<n-1+m-1<<endl;
+            return;
+        }
+    }
 
+    flag=true;
+    y=1;
+    x=1;
+   for(; y<m; y++)
+    if(distance(x,y,sx,sy)<=d)
+        {
+            flag=false;
+            break;  
+        }
+    if(flag)
+    {
+
+        for(; x<=n; x++)
+        {
+            if(distance(x,y,sx,sy)<=d)
+            {
+                flag=false;
+                break;
+            }
+        }
+        if(flag)
+        {
+            cout<<n-1+m-1<<endl;
+            return;
+        }
+    }
+    cout<<-1<<endl;
 }
 int main()
 {
